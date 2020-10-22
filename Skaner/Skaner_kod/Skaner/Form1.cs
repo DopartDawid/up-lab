@@ -16,5 +16,35 @@ namespace Skaner
         {
             InitializeComponent();
         }
+
+        private void contrastBar_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void brightnessBar_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void typeOfScan_Box(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void scanBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
