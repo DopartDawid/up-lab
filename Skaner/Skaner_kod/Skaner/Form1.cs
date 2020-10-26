@@ -22,7 +22,7 @@ namespace Skaner
 
         int contrastLevel = 0;
         int brightnessLevel = 0;
-        int dpi = 400;
+        int dpi = 100;
         int colorSettting = 1;
 
         private static void AdjustScannerSettings(IItem scannnerItem, int scanResolutionDPI, int scanStartLeftPixel, int scanStartTopPixel, int brightnessPercents, int contrastPercents, int colorMode)
@@ -137,5 +137,20 @@ namespace Skaner
             }
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void resolutionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (resolutionCombo.SelectedIndex == 0) dpi = 100;
+            if (resolutionCombo.SelectedIndex == 1) dpi = 200;
+            if (resolutionCombo.SelectedIndex == 2) dpi = 300;
+            if (resolutionCombo.SelectedIndex == 3) dpi = 400;
+            if (resolutionCombo.SelectedIndex == 4) dpi = 500;
+            if (resolutionCombo.SelectedIndex == 5) dpi = 600;
+
+        }
     }
 }

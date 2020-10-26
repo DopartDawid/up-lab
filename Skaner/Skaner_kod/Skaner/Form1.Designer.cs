@@ -40,6 +40,8 @@
             this.typeOfScanCombo = new System.Windows.Forms.ComboBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.scannerListBox = new System.Windows.Forms.ListBox();
+            this.resolutionCombo = new System.Windows.Forms.ComboBox();
+            this.resolutionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.scanImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contrastBar)).BeginInit();
@@ -47,16 +49,16 @@
             // 
             // scanImage
             // 
-            this.scanImage.Location = new System.Drawing.Point(467, 34);
+            this.scanImage.Location = new System.Drawing.Point(512, 41);
             this.scanImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.scanImage.Name = "scanImage";
-            this.scanImage.Size = new System.Drawing.Size(285, 379);
+            this.scanImage.Size = new System.Drawing.Size(345, 451);
             this.scanImage.TabIndex = 0;
             this.scanImage.TabStop = false;
             // 
             // scanButton
             // 
-            this.scanButton.Location = new System.Drawing.Point(56, 361);
+            this.scanButton.Location = new System.Drawing.Point(57, 437);
             this.scanButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.scanButton.Name = "scanButton";
             this.scanButton.Size = new System.Drawing.Size(111, 53);
@@ -67,7 +69,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(229, 361);
+            this.exitButton.Location = new System.Drawing.Point(230, 437);
             this.exitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(111, 55);
@@ -150,7 +152,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(60, 299);
+            this.saveButton.Location = new System.Drawing.Point(61, 375);
             this.saveButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(280, 28);
@@ -164,16 +166,45 @@
             this.scannerListBox.FormattingEnabled = true;
             this.scannerListBox.ItemHeight = 16;
             this.scannerListBox.Location = new System.Drawing.Point(56, 31);
-            this.scannerListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.scannerListBox.Margin = new System.Windows.Forms.Padding(4);
             this.scannerListBox.Name = "scannerListBox";
             this.scannerListBox.Size = new System.Drawing.Size(281, 36);
             this.scannerListBox.TabIndex = 13;
+            // 
+            // resolutionCombo
+            // 
+            this.resolutionCombo.FormattingEnabled = true;
+            this.resolutionCombo.Items.AddRange(new object[] {
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600"});
+            this.resolutionCombo.Location = new System.Drawing.Point(61, 320);
+            this.resolutionCombo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.resolutionCombo.Name = "resolutionCombo";
+            this.resolutionCombo.Size = new System.Drawing.Size(285, 24);
+            this.resolutionCombo.TabIndex = 14;
+            this.resolutionCombo.SelectedIndexChanged += new System.EventHandler(this.resolutionCombo_SelectedIndexChanged);
+            // 
+            // resolutionLabel
+            // 
+            this.resolutionLabel.AutoSize = true;
+            this.resolutionLabel.Location = new System.Drawing.Point(58, 292);
+            this.resolutionLabel.Name = "resolutionLabel";
+            this.resolutionLabel.Size = new System.Drawing.Size(98, 17);
+            this.resolutionLabel.TabIndex = 15;
+            this.resolutionLabel.Text = "Rozdzielczość";
+            this.resolutionLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(917, 545);
+            this.Controls.Add(this.resolutionLabel);
+            this.Controls.Add(this.resolutionCombo);
             this.Controls.Add(this.scannerListBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.typeOfScanCombo);
@@ -212,6 +243,8 @@
         private System.Windows.Forms.ComboBox typeOfScanCombo;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ListBox scannerListBox;
+        private System.Windows.Forms.ComboBox resolutionCombo;
+        private System.Windows.Forms.Label resolutionLabel;
     }
 }
 
