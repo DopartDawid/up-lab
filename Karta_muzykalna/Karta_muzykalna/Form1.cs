@@ -16,7 +16,7 @@ namespace Karta_muzykalna
         public Form1()
         {
             InitializeComponent();
-            player = new PlayerHelper();
+            player = new PlayerHelper(this);
         }
 
         private void recStopButton_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace Karta_muzykalna
                 foreach(var item in infoMap)
                 {
                     listBox1.Items.Add(item.Key + ": " + item.Value);
-                }
+               }
             }
 
         }
@@ -74,6 +74,16 @@ namespace Karta_muzykalna
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void radioButton1_CheckedChanged_2(object sender, EventArgs e)
+        {
+            player.changePlayer(PlayerHelper.PlayerType.ACTIVEX);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            player.changePlayer(PlayerHelper.PlayerType.DIRECTSOUND);
         }
     }
 }

@@ -1,23 +1,53 @@
-﻿using System;
+﻿using Microsoft.DirectX.DirectSound;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Karta_muzykalna
 {
     class PlayerHelper
     {
+        //ActiveX
         SoundPlayer wavPlayer;
         String wavFile;
-        
-        public PlayerHelper()
+
+        //DirectSound
+        Microsoft.DirectX.DirectSound.Device soundDevice;
+        BufferDescription buffDesc;
+        SecondaryBuffer sound;
+
+        public enum PlayerType
+        {
+            ACTIVEX,
+            DIRECTSOUND,
+        }
+
+        PlayerType playerType = PlayerType.ACTIVEX;
+
+        public PlayerHelper(Form parent)
         {
             wavPlayer = new SoundPlayer();
             wavFile = null;
+
+
+            soundDevice = new Microsoft.DirectX.DirectSound.Device(DSoundHelper.DefaultPlaybackDevice);
+            soundDevice.SetCooperativeLevel(parent,CooperativeLevel.Normal);
+            buffDesc = new BufferDescription();
+            buffDesc.ControlEffects = false;
+            sound = null;
+            
+        }
+
+        public void changePlayer(PlayerType type)
+        {
+            playerType = type;
         }
 
         public Dictionary<String, String> readLoadedWAVHeaderInfo()
@@ -49,13 +79,33 @@ namespace Karta_muzykalna
 
         public void playWav()
         {
-            wavPlayer.SoundLocation = wavFile;
-            wavPlayer.Play();
+            switch(playerType)
+            {
+                case PlayerType.ACTIVEX:
+                    {
+                        wavPlayer.SoundLocation = wavFile;
+                        wavPlayer.Play();
+                        break;
+                    }
+
+                case PlayerType.DIRECTSOUND:
+                    {
+                        sound = new SecondaryBuffer(wavFile, buffDesc, soundDevice);
+                        sound.Play(0, BufferPlayFlags.Default);
+                        break;
+                    }
+            }
+
         }
 
         public void stopWav()
         {
             wavPlayer.Stop();
+            if(sound != null)
+            {
+                sound.Stop();
+                sound = null;
+            }
         }
     }
 }
