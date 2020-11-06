@@ -17,11 +17,14 @@ namespace Karta_muzykalna
         //ActiveX
         SoundPlayer wavPlayer;
         String wavFile;
-
+  
         //DirectSound
         Microsoft.DirectX.DirectSound.Device soundDevice;
         BufferDescription buffDesc;
         SecondaryBuffer sound;
+
+        //MP3
+        WMPLib.WindowsMediaPlayer wplayer;
 
         public enum PlayerType
         {
@@ -42,7 +45,8 @@ namespace Karta_muzykalna
             buffDesc = new BufferDescription();
             buffDesc.ControlEffects = false;
             sound = null;
-            
+
+            wplayer = new WMPLib.WindowsMediaPlayer();
         }
 
         public void changePlayer(PlayerType type)
@@ -79,21 +83,29 @@ namespace Karta_muzykalna
 
         public void playWav()
         {
-            switch(playerType)
+            if(wavFile.Contains(".mp3"))
             {
-                case PlayerType.ACTIVEX:
-                    {
-                        wavPlayer.SoundLocation = wavFile;
-                        wavPlayer.Play();
-                        break;
-                    }
+                wplayer.URL = wavFile;
+                wplayer.controls.play();
+            }
+            else
+            {
+                switch (playerType)
+                {
+                    case PlayerType.ACTIVEX:
+                        {
+                            wavPlayer.SoundLocation = wavFile;
+                            wavPlayer.Play();
+                            break;
+                        }
 
-                case PlayerType.DIRECTSOUND:
-                    {
-                        sound = new SecondaryBuffer(wavFile, buffDesc, soundDevice);
-                        sound.Play(0, BufferPlayFlags.Default);
-                        break;
-                    }
+                    case PlayerType.DIRECTSOUND:
+                        {
+                            sound = new SecondaryBuffer(wavFile, buffDesc, soundDevice);
+                            sound.Play(0, BufferPlayFlags.Default);
+                            break;
+                        }
+                }
             }
 
         }
@@ -106,6 +118,7 @@ namespace Karta_muzykalna
                 sound.Stop();
                 sound = null;
             }
+            wplayer.controls.stop();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Karta_muzykalna
             OpenFileDialog dialog = new OpenFileDialog();
    
             dialog.CheckFileExists = true;
-            dialog.Filter = "WAV files (*.wav)|*.wav";
+            dialog.Filter = "WAV files (*.wav)|*.wav|MP3 files (.mp3)|*.mp3";
             dialog.DefaultExt = ".wav";
 
             if (dialog.ShowDialog() == DialogResult.OK)
