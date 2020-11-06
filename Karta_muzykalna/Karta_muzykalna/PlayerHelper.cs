@@ -29,7 +29,7 @@ namespace Karta_muzykalna
 
         //NAudio Record
         String recordFile = @"E:\Studia\Zajecia\V Semestr\UP\Laby\up-lab\audio.wav";
-        private WasapiLoopbackCapture recordInstance = null;
+        private WaveIn recordInstance = null;
         private WaveFileWriter recordWriter = null;
 
         public enum PlayerType
@@ -127,23 +127,29 @@ namespace Karta_muzykalna
             wplayer.controls.stop();
         }
 
+        private void recordInstance_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
+        {
+            if (recordWriter == null) return;
+            recordWriter.Write(e.Buffer, 0, e.BytesRecorded);
+            recordWriter.Flush();
+        }
+
+        private void recordInstance_RecordingStopped(object sender, NAudio.Wave.StoppedEventArgs e)
+        {
+            this.recordWriter.Dispose();
+            this.recordWriter = null;
+            recordInstance.Dispose();
+        }
+
         public void startRecord()
         {
-            this.recordInstance = new WasapiLoopbackCapture();
-            this.recordWriter = new WaveFileWriter(recordFile, recordInstance.WaveFormat);
+            recordInstance = new WaveIn();
+            recordInstance.WaveFormat = new NAudio.Wave.WaveFormat(48000, 1);
+           
+            recordInstance.DataAvailable += new EventHandler<WaveInEventArgs>(recordInstance_DataAvailable);
+            recordInstance.RecordingStopped += new EventHandler<StoppedEventArgs>(recordInstance_RecordingStopped);
 
-            this.recordInstance.DataAvailable += (s, a) =>
-            {
-                this.recordWriter.Write(a.Buffer, 0, a.BytesRecorded);
-            };
-
-            this.recordInstance.RecordingStopped += (s, a) =>
-            {
-                this.recordWriter.Dispose();
-                this.recordWriter = null;
-                recordInstance.Dispose();
-            };
-
+            recordWriter = new WaveFileWriter(recordFile, recordInstance.WaveFormat);
             recordInstance.StartRecording();
         }
 
