@@ -21,7 +21,7 @@ namespace Karta_muzykalna
 
         private void recStopButton_Click(object sender, EventArgs e)
         {
-
+            player.stopRecord();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -84,6 +84,11 @@ namespace Karta_muzykalna
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             player.changePlayer(PlayerHelper.PlayerType.DIRECTSOUND);
+        }
+
+        private void recordButton_Click(object sender, EventArgs e)
+        {
+            player.startRecord();
         }
     }
 }

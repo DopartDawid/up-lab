@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAudio.Wave;
 
 namespace Karta_muzykalna
 {
@@ -25,6 +26,11 @@ namespace Karta_muzykalna
 
         //MP3
         WMPLib.WindowsMediaPlayer wplayer;
+
+        //NAudio Record
+        String recordFile = @"E:\Studia\Zajecia\V Semestr\UP\Laby\up-lab\audio.wav";
+        private WasapiLoopbackCapture recordInstance = null;
+        private WaveFileWriter recordWriter = null;
 
         public enum PlayerType
         {
@@ -119,6 +125,31 @@ namespace Karta_muzykalna
                 sound = null;
             }
             wplayer.controls.stop();
+        }
+
+        public void startRecord()
+        {
+            this.recordInstance = new WasapiLoopbackCapture();
+            this.recordWriter = new WaveFileWriter(recordFile, recordInstance.WaveFormat);
+
+            this.recordInstance.DataAvailable += (s, a) =>
+            {
+                this.recordWriter.Write(a.Buffer, 0, a.BytesRecorded);
+            };
+
+            this.recordInstance.RecordingStopped += (s, a) =>
+            {
+                this.recordWriter.Dispose();
+                this.recordWriter = null;
+                recordInstance.Dispose();
+            };
+
+            recordInstance.StartRecording();
+        }
+
+        public void stopRecord()
+        {
+            recordInstance.StopRecording();
         }
     }
 }
