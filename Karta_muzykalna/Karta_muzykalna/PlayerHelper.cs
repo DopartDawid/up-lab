@@ -49,7 +49,8 @@ namespace Karta_muzykalna
             soundDevice = new Microsoft.DirectX.DirectSound.Device(DSoundHelper.DefaultPlaybackDevice);
             soundDevice.SetCooperativeLevel(parent,CooperativeLevel.Normal);
             buffDesc = new BufferDescription();
-            buffDesc.ControlEffects = false;
+            buffDesc.ControlEffects = true;
+            buffDesc.ControlPan = true;
             sound = null;
 
             wplayer = new WMPLib.WindowsMediaPlayer();
@@ -58,6 +59,11 @@ namespace Karta_muzykalna
         public void changePlayer(PlayerType type)
         {
             playerType = type;
+        }
+
+        public void changePanning(int value)
+        {
+            sound.Pan = value;
         }
 
         public Dictionary<String, String> readLoadedWAVHeaderInfo()

@@ -90,5 +90,10 @@ namespace Karta_muzykalna
         {
             player.startRecord();
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            player.changePanning(trackBar1.Value);
+        }
     }
 }
