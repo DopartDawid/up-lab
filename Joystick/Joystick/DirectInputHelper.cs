@@ -20,8 +20,8 @@ namespace Joystick
      
         public DirectInputHelper()
         {
-            valueX = 0;
-            valueY = 0;
+            valueX = 65535 / 2;
+            valueY = 65535 / 2;
             valueTriggers = 0;
             isButtonClicked = false;
             directInput = new DirectInput();
@@ -67,6 +67,8 @@ namespace Joystick
             joystick.Acquire();
             while(true)
             {
+                if (joystick.IsDisposed)
+                    return;
                 joystick.Poll();
                 var datas = joystick.GetBufferedData();
                 foreach (var state in datas)
@@ -74,6 +76,7 @@ namespace Joystick
                     if (state.Offset.ToString().Equals("X"))
                     {
                         valueX = state.Value;
+                        Console.WriteLine(valueX);
                     }
                     else if(state.Offset.ToString().Equals("Y"))
                     {
