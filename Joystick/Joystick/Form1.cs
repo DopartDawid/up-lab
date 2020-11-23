@@ -32,7 +32,6 @@ namespace Joystick
 
             pictureBox1.BackColor = Color.White;
             g = pictureBox1.CreateGraphics();
-            this.Controls.Add(pictureBox1);
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -43,9 +42,9 @@ namespace Joystick
             this.Invoke((MethodInvoker)delegate
             {
                 this.Cursor = new Cursor(Cursor.Current.Handle);
-                Cursor.Position = new Point(Cursor.Position.X + (int)(4 * ((float)(2 * helper.valueX - maxPadValue) / maxPadValue)), Cursor.Position.Y + (int)(4 * ((float)(2 * helper.valueY - maxPadValue) / maxPadValue)));
-                Console.WriteLine((float)(2*helper.valueX - maxPadValue)/maxPadValue);
-                Cursor.Clip = new Rectangle(this.Location, this.Size);
+                Cursor.Position = new Point(Cursor.Position.X + (int)(4 * ((float)(2 * helper.valueX - maxPadValue) / maxPadValue)), 
+                    Cursor.Position.Y + (int)(4 * ((float)(2 * helper.valueY - maxPadValue) / maxPadValue)));
+                //Cursor.Clip = new Rectangle(this.Location, this.Size);
             });
         }
 
@@ -62,11 +61,13 @@ namespace Joystick
                 label4.Invoke((MethodInvoker)delegate
                 {
                     label4.Size = new Size(label4.Size.Width, Convert.ToInt32(progressBarMaxSize * (Convert.ToDouble(helper.valueY) / maxPadValue)));
+                    label4.BackColor = Color.Green;
                 });
 
                 label5.Invoke((MethodInvoker)delegate
                 {
                     label5.Size = new Size(Convert.ToInt32(progressBarMaxSize * (Convert.ToDouble(helper.valueX) / maxPadValue)), label5.Size.Height);
+                    label5.BackColor = Color.Green;
                 });
 
                 checkBox1.Invoke((MethodInvoker)delegate

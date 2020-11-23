@@ -56,12 +56,6 @@ namespace Joystick
                 return;
 
             SharpDX.DirectInput.Joystick joystick = new SharpDX.DirectInput.Joystick(directInput, gamepadDevice.InstanceGuid);
-
-            var allEffects = joystick.GetEffects();
-            foreach (var effectInfo in allEffects)
-                Console.WriteLine("Effect available {0}", effectInfo.Name);
-
-            // Set BufferSize in order to use buffered data.
             joystick.Properties.BufferSize = 128;
 
             joystick.Acquire();
