@@ -61,5 +61,60 @@ namespace Kamera
         {
             helper.recordVideo();
         }
+
+        private void contrastBar_ValueChanged(object sender, EventArgs e)
+        {
+            helper.contrastVal = (int)contrastBar.Value;
+        }
+
+        private void brightnessBar_ValueChanged(object sender, EventArgs e)
+        {
+            helper.brightnessVal = (int)brightnessBar.Value;
+        }
+
+        private void saturationBar_ValueChanged(object sender, EventArgs e)
+        {
+            helper.saturationVal = (float)saturationBar.Value / 100;
+        }
+
+        private void normalRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if(normalRadioButton.Checked == true)
+            {
+                helper.isGray = false;
+                helper.isBW = false;
+            }
+        }
+
+        private void grayRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (grayRadioButton.Checked == true)
+            {
+                helper.isGray = true;
+                helper.isBW = false;
+            }
+        }
+
+        private void BWradioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BWradioButton1.Checked == true)
+            {
+                helper.isGray = false;
+                helper.isBW = true;
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            normalRadioButton.Checked = true;
+            contrastBar.Value = 50;
+            brightnessBar.Value = 0;
+            saturationBar.Value = 0;
+        }
+
+        private void screenButton_Click(object sender, EventArgs e)
+        {
+            helper.saveSnapshot();
+        }
     }
 }

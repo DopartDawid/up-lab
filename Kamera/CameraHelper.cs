@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +22,13 @@ namespace Kamera
         public Bitmap currentFrameRecord;
         public bool isRecording = false;
 
-        private int contrastVal;
-        private int brightnessVal;
-        private float saturationVal;
+        public int contrastVal;
+        public int brightnessVal;
+        public float saturationVal;
 
+        public bool isGray = false;
+        public bool isBW = false;
+ 
         public CameraHelper()
         {
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -88,6 +93,15 @@ namespace Kamera
             bitmap = contrastFilter.Apply((Bitmap)bitmap.Clone());
             bitmap = saturationFilter.Apply((Bitmap)bitmap.Clone());
 
+            if (isGray)
+            {
+                bitmap = grayscaleFilter.Apply((Bitmap)bitmap.Clone());
+            }
+            if (isBW)
+            {
+                bitmap = grayscaleFilter.Apply((Bitmap)bitmap.Clone());
+                bitmap = thresholdFilter.Apply(bitmap);
+            }
 
             currentFrame = (Bitmap)bitmap.Clone();
             if(fileWriter != null)
@@ -101,6 +115,25 @@ namespace Kamera
             fileWriter = new VideoFileWriter();
             fileWriter.Open("test.avi", currentFrame.Width, currentFrame.Height, 10, VideoCodec.MPEG4, 2500000);
         }
+
+        public void saveSnapshot()
+        {
+            if (currentFrame != null)
+            {
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.FileName = "test_snap";
+                dialog.DefaultExt = ".jpg";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(dialog.FileName))
+                        File.Delete(dialog.FileName);
+                    currentFrame.Save(dialog.FileName);
+
+                }
+
+            }
+        }
+
     }
 
 
