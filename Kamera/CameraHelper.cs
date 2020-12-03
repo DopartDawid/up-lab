@@ -15,7 +15,9 @@ namespace Kamera
         FilterInfoCollection videoDevices;
         VideoCaptureDevice videoSource;
         FilterInfo choosenDevice;
+        VideoFileWriter fileWriter;
         public Bitmap currentFrame;
+        public Bitmap currentFrameRecord;
         public bool isRecording = false;
 
         private int contrastVal;
@@ -28,6 +30,7 @@ namespace Kamera
             videoSource = null;
             choosenDevice = null;
             currentFrame = null;
+            fileWriter = null;
         }
 
         public List<String> getVideoDevicesNames()
@@ -67,6 +70,9 @@ namespace Kamera
             if (videoSource != null)
                 videoSource.SignalToStop();
             isRecording = false;
+            fileWriter.Close();
+            fileWriter.Dispose();
+            fileWriter = null;
         }
 
         private void videoNewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -84,19 +90,16 @@ namespace Kamera
 
 
             currentFrame = (Bitmap)bitmap.Clone();
+            if(fileWriter != null)
+            {
+                fileWriter.WriteVideoFrame((Bitmap)bitmap.Clone());
+            }
         }
 
         public void recordVideo()
         {
-            VideoFileWriter fileWriter = new VideoFileWriter();
-            fileWriter.Open("test.avi", currentFrame.Width, currentFrame.Height, 60, VideoCodec.Default, 10000);
-
-            while(isRecording)
-            {
-                fileWriter.WriteVideoFrame((Bitmap)currentFrame.Clone());
-            }
-
-            fileWriter.Close();
+            fileWriter = new VideoFileWriter();
+            fileWriter.Open("test.avi", currentFrame.Width, currentFrame.Height, 10, VideoCodec.MPEG4, 2500000);
         }
     }
 

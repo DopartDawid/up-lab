@@ -45,7 +45,7 @@ namespace Kamera
                 pictureBox1.Invoke((MethodInvoker)delegate
                 {
                     if(helper.currentFrame != null)
-                        pictureBox1.Image = (Bitmap)helper.currentFrame.Clone();
+                        pictureBox1.Image = helper.currentFrame;
                 });
             }
 
@@ -59,8 +59,7 @@ namespace Kamera
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(helper.recordVideo);
-            thread.Start();
+            helper.recordVideo();
         }
     }
 }
