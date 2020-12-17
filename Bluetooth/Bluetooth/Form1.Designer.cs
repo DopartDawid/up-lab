@@ -42,19 +42,21 @@
             // 
             this.adaptersListBox.FormattingEnabled = true;
             this.adaptersListBox.ItemHeight = 16;
-            this.adaptersListBox.Location = new System.Drawing.Point(449, 252);
+            this.adaptersListBox.Location = new System.Drawing.Point(50, 262);
             this.adaptersListBox.Name = "adaptersListBox";
             this.adaptersListBox.Size = new System.Drawing.Size(297, 116);
             this.adaptersListBox.TabIndex = 0;
+            this.adaptersListBox.SelectedIndexChanged += new System.EventHandler(this.adaptersListBox_SelectedIndexChanged);
             // 
             // devicesListBox
             // 
             this.devicesListBox.FormattingEnabled = true;
             this.devicesListBox.ItemHeight = 16;
-            this.devicesListBox.Location = new System.Drawing.Point(51, 252);
+            this.devicesListBox.Location = new System.Drawing.Point(395, 262);
             this.devicesListBox.Name = "devicesListBox";
             this.devicesListBox.Size = new System.Drawing.Size(322, 116);
             this.devicesListBox.TabIndex = 1;
+            this.devicesListBox.SelectedIndexChanged += new System.EventHandler(this.devicesListBox_SelectedIndexChanged);
             // 
             // searchAdapterButton
             // 
@@ -64,6 +66,7 @@
             this.searchAdapterButton.TabIndex = 2;
             this.searchAdapterButton.Text = "Search Adapters";
             this.searchAdapterButton.UseVisualStyleBackColor = true;
+            this.searchAdapterButton.Click += new System.EventHandler(this.searchAdapterButton_Click);
             // 
             // adaptersInfoButton
             // 
@@ -73,42 +76,47 @@
             this.adaptersInfoButton.TabIndex = 3;
             this.adaptersInfoButton.Text = "Adapter Info";
             this.adaptersInfoButton.UseVisualStyleBackColor = true;
+            this.adaptersInfoButton.Click += new System.EventHandler(this.adaptersInfoButton_Click);
             // 
             // searchDevicesButton
             // 
-            this.searchDevicesButton.Location = new System.Drawing.Point(510, 32);
+            this.searchDevicesButton.Location = new System.Drawing.Point(476, 37);
             this.searchDevicesButton.Name = "searchDevicesButton";
-            this.searchDevicesButton.Size = new System.Drawing.Size(132, 40);
+            this.searchDevicesButton.Size = new System.Drawing.Size(197, 40);
             this.searchDevicesButton.TabIndex = 4;
             this.searchDevicesButton.Text = "Search Devices";
             this.searchDevicesButton.UseVisualStyleBackColor = true;
+            this.searchDevicesButton.Click += new System.EventHandler(this.searchDevicesButton_Click);
             // 
             // deviceInfoButton
             // 
-            this.deviceInfoButton.Location = new System.Drawing.Point(476, 83);
+            this.deviceInfoButton.Location = new System.Drawing.Point(476, 86);
             this.deviceInfoButton.Name = "deviceInfoButton";
-            this.deviceInfoButton.Size = new System.Drawing.Size(197, 44);
+            this.deviceInfoButton.Size = new System.Drawing.Size(197, 37);
             this.deviceInfoButton.TabIndex = 5;
             this.deviceInfoButton.Text = "Device Info";
             this.deviceInfoButton.UseVisualStyleBackColor = true;
+            this.deviceInfoButton.Click += new System.EventHandler(this.deviceInfoButton_Click);
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(592, 190);
+            this.connectButton.Location = new System.Drawing.Point(476, 176);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(125, 28);
+            this.connectButton.Size = new System.Drawing.Size(197, 37);
             this.connectButton.TabIndex = 6;
             this.connectButton.Text = "Connect device";
             this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // sendFileButton
             // 
-            this.sendFileButton.Location = new System.Drawing.Point(421, 181);
+            this.sendFileButton.Location = new System.Drawing.Point(476, 133);
             this.sendFileButton.Name = "sendFileButton";
-            this.sendFileButton.Size = new System.Drawing.Size(115, 37);
+            this.sendFileButton.Size = new System.Drawing.Size(197, 37);
             this.sendFileButton.TabIndex = 7;
             this.sendFileButton.Text = "Send File";
             this.sendFileButton.UseVisualStyleBackColor = true;
+            this.sendFileButton.Click += new System.EventHandler(this.sendFileButton_Click);
             // 
             // Form1
             // 

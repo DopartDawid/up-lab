@@ -83,7 +83,6 @@ namespace Kamera
         private void videoNewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
-            //Dostosować te bazowe do kamerki
             Threshold thresholdFilter = new Threshold(120);
             Grayscale grayscaleFilter = new Grayscale(0.2, 0.7, 0.07);
             BrightnessCorrection brightnessFilter = new BrightnessCorrection(brightnessVal);
